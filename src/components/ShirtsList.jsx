@@ -103,7 +103,7 @@ const ShirtsList = () => {
                 <h1 className="text-3xl font-bold text-gray-800">Camisetas</h1>
                 <button
                     onClick={handleCreate}
-                    className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
                 >
                     + Nueva Camiseta
                 </button>

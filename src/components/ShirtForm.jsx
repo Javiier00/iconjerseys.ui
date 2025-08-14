@@ -101,7 +101,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                 name="team_id"
                                 value={formData.team_id}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             >
                                 <option value="">Seleccionar equipo...</option>
@@ -122,7 +122,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Ej: Camiseta Visita 2025"
                                 maxLength="100"
                                 autoFocus={!item}
@@ -139,7 +139,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 rows="3"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Descripción de la camiseta..."
                                 maxLength="500"
                             />
@@ -156,7 +156,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                 value={formData.image}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="https://ejemplo.com/camiseta.jpg"
                             />
                         </div>
@@ -173,7 +173,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                     value={formData.price}
                                     onChange={handleChange}
                                     onKeyDown={handleKeyPress}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="0.00"
                                     min="0.01"
                                     step="0.01"
@@ -191,7 +191,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                     value={formData.discount}
                                     onChange={handleChange}
                                     onKeyDown={handleKeyPress}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="0"
                                     min="0"
                                     max="100"
@@ -210,7 +210,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                                 value={formData.size}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Ej: S, M, L, XL"
                                 maxLength="5"
                             />
@@ -243,7 +243,7 @@ const ShirtForm = ({ item, teams, onSuccess, onCancel }) => {
                             type="button"
                             onClick={handleSubmit}
                             disabled={isSubmitting}
-                            className="px-4 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-md disabled:opacity-50 transition-colors"
+                            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md disabled:opacity-50 transition-colors"
                         >
                             {isSubmitting ? 'Guardando...' : 'Guardar'}
                         </button>

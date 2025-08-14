@@ -98,7 +98,7 @@ const FutbolTeamForm = ({ item, onSuccess, onCancel }) => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Ej: Real Madrid"
                                 maxLength="100"
                                 autoFocus
@@ -116,7 +116,7 @@ const FutbolTeamForm = ({ item, onSuccess, onCancel }) => {
                                 value={formData.country}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Ej: España"
                                 maxLength="50"
                             />
@@ -136,7 +136,7 @@ const FutbolTeamForm = ({ item, onSuccess, onCancel }) => {
                             type="button"
                             onClick={handleSubmit}
                             disabled={isSubmitting}
-                            className="px-4 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 rounded-md disabled:opacity-50 transition-colors"
+                            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md disabled:opacity-50 transition-colors"
                         >
                             {isSubmitting ? 'Guardando...' : 'Guardar'}
                         </button>
