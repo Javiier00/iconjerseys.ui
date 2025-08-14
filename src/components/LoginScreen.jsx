@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
 import { isValidEmail, validatePassword } from "../utils/validators";
+import balonImage from "../assets/balon.png"; 
 import cr7Image from "../assets/cr7.png"; 
 
 const LoginScreen = () => {
@@ -66,10 +67,10 @@ return (
 
             {/* Header con imagen */}
             <div className="text-center mb-8 relative">
-                <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
+                <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 border-4 border-white-400 shadow-lg">
                     <img
-                        src={cr7Image}
-                        alt="Cristiano Ronaldo"
+                        src={balonImage}
+                        alt="Balon de oro"
                         className="w-full h-full object-cover"
                     />
                 </div>
