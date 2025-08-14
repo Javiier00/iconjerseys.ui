@@ -96,94 +96,95 @@ const FutbolTeamsList = () => {
         );
     }
 
-    return (
-        <Layout>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold text-gray-800">Equipos de Fútbol</h1>
-                <button
-                    onClick={handleCreate}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-                >
-                    + Nuevo Equipo
-                </button>
+return (
+    <Layout>
+        <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-800">Equipos de Fútbol</h1>
+            <button
+                onClick={handleCreate}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 px-4 rounded-md transition-colors"
+            >
+                + Nuevo Equipo
+            </button>
+        </div>
+
+        {successMessage && (
+            <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                <div className="flex items-center">
+                    <span className="mr-2">✅</span>
+                    <span>{successMessage}</span>
+                </div>
             </div>
+        )}
 
-            {successMessage && (
-                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
-                    <div className="flex items-center">
-                        <span className="mr-2">✅</span>
-                        <span>{successMessage}</span>
-                    </div>
+        {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                <div className="flex items-center">
+                    <span className="mr-2">❌</span>
+                    <span>{error}</span>
                 </div>
-            )}
+            </div>
+        )}
 
-            {error && (
-                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                    <div className="flex items-center">
-                        <span className="mr-2">❌</span>
-                        <span>{error}</span>
-                    </div>
-                </div>
-            )}
-
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">País</th>
+                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    {teams.length === 0 ? (
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">País</th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
+                                No hay equipos registrados
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {teams.length === 0 ? (
-                            <tr>
-                                <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
-                                    No hay equipos registrados
+                    ) : (
+                        teams.map((team) => (
+                            <tr
+                                key={team.id}
+                                className={`hover:bg-gray-50 transition-colors ${
+                                    recentlyUpdated === team.id ? 'bg-green-50 border-l-4 border-green-400' : ''
+                                }`}
+                            >
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.id}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.country}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button
+                                        onClick={() => handleEdit(team)}
+                                        className="text-yellow-400 hover:text-yellow-600 mr-2"
+                                    >
+                                        Editar 
+                                    </button>
+                                    <button 
+                                        onClick={() => handleDelete(team.id)}
+                                        className="text-red-600 hover:text-red-900"   
+                                    >    
+                                        Eliminar
+                                    </button>
                                 </td>
                             </tr>
-                        ) : (
-                            teams.map((team) => (
-                                <tr
-                                    key={team.id}
-                                    className={`hover:bg-gray-50 transition-colors ${
-                                        recentlyUpdated === team.id ? 'bg-green-50 border-l-4 border-green-400' : ''
-                                    }`}
-                                >
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.id}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{team.country}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button
-                                            onClick={() => handleEdit(team)}
-                                            className="text-blue-600 hover:text-blue-900 mr-2"
-                                        >
-                                            Editar 
-                                        </button>
-                                        <button 
-                                            onClick={() => handleDelete(team.id)}
-                                            className="text-red-600 hover:text-red-900"   
-                                        >    
-                                            Eliminar
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                        ))
+                    )}
+                </tbody>
+            </table>
+        </div>
 
-            {showForm && (
-                <FutbolTeamForm
-                    item={editingTeam}
-                    onSuccess={handleFormSuccess}
-                    onCancel={handleFormCancel}
-                />
-            )}
-        </Layout>
-    );
+        {showForm && (
+            <FutbolTeamForm
+                item={editingTeam}
+                onSuccess={handleFormSuccess}
+                onCancel={handleFormCancel}
+            />
+        )}
+    </Layout>
+);
+
 };
 
 export default FutbolTeamsList;

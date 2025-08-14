@@ -69,82 +69,85 @@ const FutbolTeamForm = ({ item, onSuccess, onCancel }) => {
         if (e.key === 'Escape') onCancel();
     };
 
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
-                <div className="p-6">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">
-                        {item ? 'Editar Equipo de Fútbol' : 'Nuevo Equipo de Fútbol'}
-                    </h2>
+return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-black bg-opacity-80 rounded-lg shadow-xl max-w-md w-full">
+            <div className="p-6">
 
-                    {error && (
-                        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                            <div className="flex items-center">
-                                <span className="mr-2">❌</span>
-                                <span>{error}</span>
-                            </div>
-                        </div>
-                    )}
+                <h2 className="text-xl font-bold text-yellow-400 mb-4">
+                    {item ? 'Editar Equipo de Fútbol' : 'Nuevo Equipo de Fútbol'}
+                </h2>
 
-                    <div className="space-y-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Nombre del Equipo *
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Ej: Real Madrid"
-                                maxLength="100"
-                                autoFocus
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
-                                País *
-                            </label>
-                            <input
-                                type="text"
-                                id="country"
-                                name="country"
-                                value={formData.country}
-                                onChange={handleChange}
-                                onKeyDown={handleKeyPress}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Ej: España"
-                                maxLength="50"
-                            />
+                {error && (
+                    <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                        <div className="flex items-center">
+                            <span className="mr-2">❌</span>
+                            <span>{error}</span>
                         </div>
                     </div>
+                )}
 
-                    <div className="flex justify-end space-x-3 mt-6">
-                        <button
-                            type="button"
-                            onClick={onCancel}
-                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
-                            disabled={isSubmitting}
-                        >
-                            Cancelar
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleSubmit}
-                            disabled={isSubmitting}
-                            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md disabled:opacity-50 transition-colors"
-                        >
-                            {isSubmitting ? 'Guardando...' : 'Guardar'}
-                        </button>
+                <div className="space-y-4">
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-yellow-200 mb-1">
+                            Nombre del Equipo *
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyPress}
+                            className="w-full px-3 py-2 border border-yellow-400 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-black text-yellow-200 placeholder-yellow-300"
+                            placeholder="Ej: Real Madrid"
+                            maxLength="100"
+                            autoFocus
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="country" className="block text-sm font-medium text-yellow-200 mb-1">
+                            País *
+                        </label>
+                        <input
+                            type="text"
+                            id="country"
+                            name="country"
+                            value={formData.country}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyPress}
+                            className="w-full px-3 py-2 border border-yellow-400 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-black text-yellow-200 placeholder-yellow-300"
+                            placeholder="Ej: España"
+                            maxLength="50"
+                        />
                     </div>
                 </div>
+
+                <div className="flex justify-end space-x-3 mt-6">
+                    <button
+                        type="button"
+                        onClick={onCancel}
+                        className="px-4 py-2 text-sm font-medium text-yellow-200 bg-yellow-900 hover:bg-yellow-800 rounded-md transition-colors"
+                        disabled={isSubmitting}
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        className="px-4 py-2 text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-500 rounded-md disabled:opacity-50 transition-colors"
+                    >
+                        {isSubmitting ? 'Guardando...' : 'Guardar'}
+                    </button>
+                </div>
+
             </div>
         </div>
-    );
-};
+    </div>
+);
+
+}
 
 export default FutbolTeamForm;

@@ -97,105 +97,106 @@ const ShirtsList = () => {
         );
     }
 
-    return (
-        <Layout>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold text-gray-800">Camisetas</h1>
-                <button
-                    onClick={handleCreate}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-                >
-                    + Nueva Camiseta
-                </button>
+return (
+    <Layout>
+        <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-800">Camisetas</h1>
+            <button
+                onClick={handleCreate}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 px-4 rounded-md transition-colors"
+            >
+                + Nueva Camiseta
+            </button>
+        </div>
+
+        {successMessage && (
+            <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                <div className="flex items-center">
+                    <span className="mr-2">✅</span>
+                    <span>{successMessage}</span>
+                </div>
             </div>
+        )}
 
-            {successMessage && (
-                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
-                    <div className="flex items-center">
-                        <span className="mr-2">✅</span>
-                        <span>{successMessage}</span>
-                    </div>
+        {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                <div className="flex items-center">
+                    <span className="mr-2">❌</span>
+                    <span>{error}</span>
                 </div>
-            )}
+            </div>
+        )}
 
-            {error && (
-                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                    <div className="flex items-center">
-                        <span className="mr-2">❌</span>
-                        <span>{error}</span>
-                    </div>
-                </div>
-            )}
-
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Equipo</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descuento</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Final</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Talla</th>
+                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    {shirts.length === 0 ? (
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Equipo</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descuento</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Final</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Talla</th>
-                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
+                                No hay camisetas registradas
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {shirts.length === 0 ? (
-                            <tr>
-                                <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
-                                    No hay camisetas registradas
+                    ) : (
+                        shirts.map((shirt) => (
+                            <tr
+                                key={shirt.id}
+                                className={`hover:bg-gray-50 transition-colors ${
+                                    recentlyUpdated === shirt.id ? 'bg-green-50 border-l-4 border-green-400' : ''
+                                }`}
+                            >
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    {teams.find(t => t.id === shirt.team_id)?.name || 'Equipo no encontrado'}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">L. {shirt.price.toFixed(2)}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.discount || 0}%</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    L. {(shirt.price * (1 - (shirt.discount || 0)/100)).toFixed(2)}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.size}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button
+                                        onClick={() => handleEdit(shirt)}
+                                        className="text-yellow-400 hover:text-yellow-600 mr-2"
+                                    >
+                                        Editar 
+                                    </button>
+                                    <button 
+                                        onClick={() => handleDelete(shirt.id)}
+                                        className="text-red-600 hover:text-red-900"
+                                    >    
+                                        Eliminar                                      
+                                    </button>
                                 </td>
                             </tr>
-                        ) : (
-                            shirts.map((shirt) => (
-                                <tr
-                                    key={shirt.id}
-                                    className={`hover:bg-gray-50 transition-colors ${
-                                        recentlyUpdated === shirt.id ? 'bg-green-50 border-l-4 border-green-400' : ''
-                                    }`}
-                                >
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {teams.find(t => t.id === shirt.team_id)?.name || 'Equipo no encontrado'}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">L. {shirt.price.toFixed(2)}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.discount || 0}%</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        L. {(shirt.price * (1 - (shirt.discount || 0)/100)).toFixed(2)}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{shirt.size}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button
-                                            onClick={() => handleEdit(shirt)}
-                                            className="text-blue-600 hover:text-blue-900 mr-2"
-                                        >
-                                            Editar 
-                                        </button>
-                                        <button 
-                                            onClick={() => handleDelete(shirt.id)}
-                                            className="text-red-600 hover:text-red-900"
-                                        >    
-                                            Eliminar                                      
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                        ))
+                    )}
+                </tbody>
+            </table>
+        </div>
 
-            {showForm && (
-                <ShirtForm
-                    item={editingShirt}
-                    teams={teams}
-                    onSuccess={handleFormSuccess}
-                    onCancel={handleFormCancel}
-                />
-            )}
-        </Layout>
-    );
+        {showForm && (
+            <ShirtForm
+                item={editingShirt}
+                teams={teams}
+                onSuccess={handleFormSuccess}
+                onCancel={handleFormCancel}
+            />
+        )}
+    </Layout>
+);
+
 };
 
 export default ShirtsList;

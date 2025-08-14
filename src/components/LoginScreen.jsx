@@ -60,100 +60,100 @@ const LoginScreen = () => {
         }
     };
 
-    return(
-        <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                {/* Header */}
-                <div className="text-center mb-8">
-                <div className="w-16 h-17 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 bg-white-200">
+return (
+    <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative overflow-hidden">
+
+            {/* Header con imagen */}
+            <div className="text-center mb-8 relative">
+                <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
                     <img
                         src={cr7Image}
                         alt="Cristiano Ronaldo"
                         className="w-full h-full object-cover"
                     />
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800">Icon Jerseys</h1>
-                <p className="text-gray-600">Inicia sesión</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-1">Icon Jerseys</h1>
+                <p className="text-gray-600">Inicia sesión en tu cuenta</p>
+            </div>
+
+            {/* Mensaje de error */}
+            {error && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md flex items-center">
+                    <span className="mr-2">❌</span>
+                    <span>{error}</span>
                 </div>
+            )}
 
-                {/* Mensaje de error */}
-                {error && (
-                    <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                        <div className="flex items-center">
-                            <span className="mr-2">❌</span>
-                            <span>{error}</span>
-                        </div>
-                    </div>
-                )}
-
-                {/* Formulario */}
-                <form className="space-y-4" noValidate>
+            {/* Formulario */}
+            <form className="space-y-5" noValidate>
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
+                    <label htmlFor="email" className="block text-sm font-medium text-yellow-700 mb-1">
+                        Email
                     </label>
                     <input
-                    type="email"
-                    id="email"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="tu@email.com"
-                    value={email}
-                    onChange={ (e) => {
-                        setEmail(e.target.value);
-                        if (error) setError(''); // Limpiar error cuando el usuario escriba
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleLogin();
-                        }
-                    }}
+                        type="email"
+                        id="email"
+                        required
+                        className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                        placeholder="tu@email.com"
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (error) setError('');
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleLogin();
+                        }}
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Contraseña
+                    <label htmlFor="password" className="block text-sm font-medium text-yellow-700 mb-1">
+                        Contraseña
                     </label>
                     <input
-                    type="password"
-                    id="password"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={ (e) => {
-                        setPassword(e.target.value);
-                        if (error) setError(''); // Limpiar error cuando el usuario escriba
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleLogin();
-                        }
-                    }}
+                        type="password"
+                        id="password"
+                        required
+                        className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                        placeholder="••••••••"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            if (error) setError('');
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleLogin();
+                        }}
                     />
                 </div>
 
                 <button
                     type="button"
                     onClick={handleLogin}
-                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
+                    className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-lg shadow-md hover:bg-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? "Iniciando sesión..." : "Iniciar Sesión"}
                 </button>
-                </form>
+            </form>
 
-                {/* Link de registro */}
-                <p className="text-center text-sm text-gray-600 mt-4">
+            {/* Link de registro */}
+            <p className="text-center text-sm text-gray-600 mt-6">
                 ¿No tienes cuenta?{" "}
-                <Link to="/signup" className="text-blue-500 hover:text-blue-600">
+                <Link to="/signup" className="text-yellow-400 font-medium hover:text-yellow-500">
                     Regístrate
                 </Link>
-                </p>
-            </div>
+            </p>
+
+            {/* Fondo decorativo */}
+            <div className="absolute -top-16 -right-16 w-40 h-40 bg-yellow-100 rounded-full opacity-20 pointer-events-none"></div>
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-yellow-200 rounded-full opacity-20 pointer-events-none"></div>
         </div>
-    )
+    </div>
+);
+
 }
 
 export default LoginScreen

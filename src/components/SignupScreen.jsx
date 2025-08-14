@@ -102,196 +102,182 @@ const SignupScreen = () => {
         }
     };
 
-    return (
-<div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                {/* Header */}
-                <div className="text-center mb-8">
-                <div className="w-16 h-17 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 bg-white-200">
+return (
+    <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative overflow-hidden">
+
+            {/* Header con imagen */}
+            <div className="text-center mb-8 relative">
+                <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center mx-auto mb-4 border-4 border-yellow-400 shadow-lg">
                     <img
                         src={cr7Image}
                         alt="Cristiano Ronaldo"
                         className="w-full h-full object-cover"
                     />
                 </div>
-                    <h1 className="text-2xl font-bold text-gray-800">Icon Jerseys </h1>
-                    <p className="text-gray-600">Crear cuenta nueva</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-1">Icon Jerseys</h1>
+                <p className="text-gray-600">Crea tu cuenta nueva</p>
+            </div>
+
+            {/* Mensajes de error y éxito */}
+            {error && (
+                <div className={`mb-4 p-3 rounded-md border ${
+                    error.includes('email ya está registrado') || error.includes('usuario ya existe')
+                        ? 'bg-orange-100 border-orange-400 text-orange-700'
+                        : 'bg-red-100 border-red-400 text-red-700'
+                } flex items-center`}>
+                    <span className="mr-2">
+                        {error.includes('email ya está registrado') || error.includes('usuario ya existe')
+                            ? '⚠️'
+                            : '❌'
+                        }
+                    </span>
+                    <span>{error}</span>
+                </div>
+            )}
+            {success && (
+                <div className="mb-4 p-3 bg-blue-100 border border-blue-400 text-blue-700 rounded-md flex items-center">
+                    <span className="mr-2">✅</span>
+                    <span>{success}</span>
+                </div>
+            )}
+
+            {/* Formulario */}
+            <form className="space-y-5" noValidate>
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-yellow-700 mb-1">
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                            placeholder="Juan"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="lastname" className="block text-sm font-medium text-yellow-700 mb-1">
+                            Apellido
+                        </label>
+                        <input
+                            type="text"
+                            id="lastname"
+                            name="lastname"
+                            value={formData.lastname}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                            placeholder="Pérez"
+                        />
+                    </div>
                 </div>
 
-                {/* Mensajes de error y éxito */}
-                {error && (
-                    <div className={`mb-4 p-3 rounded-md border ${
-                        error.includes('email ya está registrado') || error.includes('usuario ya existe')
-                            ? 'bg-orange-100 border-orange-400 text-orange-700'
-                            : 'bg-red-100 border-red-400 text-red-700'
-                    }`}>
-                        <div className="flex items-center">
-                            <span className="mr-2">
-                                {error.includes('email ya está registrado') || error.includes('usuario ya existe')
-                                    ? '⚠️'
-                                    : '❌'
-                                }
-                            </span>
-                            <span>{error}</span>
+                <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-yellow-700 mb-1">
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                        placeholder="usuario@example.com"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-yellow-700 mb-1">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                        placeholder="8-64 caracteres, 1 mayúscula, 1 número, 1 especial"
+                    />
+                    {formData.password && (
+                        <div className="mt-2 space-y-1 text-xs">
+                            {(() => {
+                                const strength = getPasswordStrength(formData.password);
+                                return (
+                                    <>
+                                        <div className={`flex items-center ${strength.isValidLength ? 'text-blue-600' : 'text-gray-400'}`}>
+                                            <span className="mr-1">{strength.isValidLength ? '✓' : '○'}</span>
+                                            8-64 caracteres
+                                        </div>
+                                        <div className={`flex items-center ${strength.hasUppercase ? 'text-blue-600' : 'text-gray-400'}`}>
+                                            <span className="mr-1">{strength.hasUppercase ? '✓' : '○'}</span>
+                                            Al menos una mayúscula
+                                        </div>
+                                        <div className={`flex items-center ${strength.hasNumber ? 'text-blue-600' : 'text-gray-400'}`}>
+                                            <span className="mr-1">{strength.hasNumber ? '✓' : '○'}</span>
+                                            Al menos un número
+                                        </div>
+                                        <div className={`flex items-center ${strength.hasSpecialChar ? 'text-blue-600' : 'text-gray-400'}`}>
+                                            <span className="mr-1">{strength.hasSpecialChar ? '✓' : '○'}</span>
+                                            Carácter especial (@$!%*?&)
+                                        </div>
+                                    </>
+                                );
+                            })()}
                         </div>
-                        {(error.includes('email ya está registrado') || error.includes('usuario ya existe')) && (
-                            <div className="mt-2 text-sm">
-                                <Link to="/login" className="text-blue-600 hover:text-blue-700 underline">
-                                    ¿Ya tienes cuenta? Inicia sesión aquí
-                                </Link>
-                            </div>
-                        )}
-                    </div>
-                )}
-                {success && (
-                    <div className="mb-4 p-3 bg-blue-100 border border-blue-400 text-blue-700 rounded-md">
-                        <div className="flex items-center">
-                            <span className="mr-2">✅</span>
-                            <span>{success}</span>
-                        </div>
-                    </div>
-                )}
+                    )}
+                </div>
 
-                {/* Formulario */}
-                <form className="space-y-4" noValidate>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Nombre
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Juan"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="lastname" className="block text-sm font-medium text-gray-700 mb-1">
-                                Apellido
-                            </label>
-                            <input
-                                type="text"
-                                id="lastname"
-                                name="lastname"
-                                value={formData.lastname}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Pérez"
-                            />
-                        </div>
-                    </div>
+                <div>
+                    <label htmlFor="confirmPassword" className="block text-sm font-medium text-yellow-700 mb-1">
+                        Confirmar Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-gray-800"
+                        placeholder="Confirma tu contraseña"
+                        onKeyDown={(e) => { if (e.key === 'Enter') handleSignup(); }}
+                    />
+                </div>
 
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="usuario2@example.com"
-                        />
-                    </div>
+                <button
+                    type="button"
+                    onClick={handleSignup}
+                    disabled={isSubmitting}
+                    className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-lg shadow-md hover:bg-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    {isSubmitting ? 'Creando cuenta...' : 'Crear Cuenta'}
+                </button>
+            </form>
 
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                            Contraseña
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="8-64 caracteres, 1 mayúscula, 1 número, 1 especial"
-                        />
-                        
-                        {/* Indicador de fortaleza de contraseña */}
-                        {formData.password && (
-                            <div className="mt-2">
-                                <div className="text-xs text-gray-600 mb-1">Requisitos de contraseña:</div>
-                                <div className="space-y-1">
-                                    {(() => {
-                                        const strength = getPasswordStrength(formData.password);
-                                        return (
-                                            <>
-                                                <div className={`text-xs flex items-center ${strength.isValidLength ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                    <span className="mr-1">{strength.isValidLength ? '✓' : '○'}</span>
-                                                    8-64 caracteres
-                                                </div>
-                                                <div className={`text-xs flex items-center ${strength.hasUppercase ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                    <span className="mr-1">{strength.hasUppercase ? '✓' : '○'}</span>
-                                                    Al menos una mayúscula
-                                                </div>
-                                                <div className={`text-xs flex items-center ${strength.hasNumber ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                    <span className="mr-1">{strength.hasNumber ? '✓' : '○'}</span>
-                                                    Al menos un número
-                                                </div>
-                                                <div className={`text-xs flex items-center ${strength.hasSpecialChar ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                    <span className="mr-1">{strength.hasSpecialChar ? '✓' : '○'}</span>
-                                                    Carácter especial (@$!%*?&)
-                                                </div>
-                                            </>
-                                        );
-                                    })()}
-                                </div>
-                            </div>
-                        )}
-                    </div>
+            {/* Link de login */}
+            <p className="text-center text-sm text-gray-600 mt-6">
+                ¿Ya tienes cuenta?{" "}
+                <Link to="/login" className="text-yellow-400 font-medium hover:text-yellow-500">
+                    Inicia sesión
+                </Link>
+            </p>
 
-                    <div>
-                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                            Confirmar Contraseña
-                        </label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Confirma tu contraseña"
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    handleSignup();
-                                }
-                            }}
-                        />
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={handleSignup}
-                        disabled={isSubmitting}
-                        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {isSubmitting ? 'Creando cuenta...' : 'Crear Cuenta'}
-                    </button>
-                </form>
-
-                {/* Link de login */}
-                <p className="text-center text-sm text-gray-600 mt-4">
-                    ¿Ya tienes cuenta?{" "}
-                    <Link to="/login" className="text-blue-500 hover:text-blue-600">
-                        Inicia sesión
-                    </Link>
-                </p>
-            </div>
+            {/* Fondo decorativo */}
+            <div className="absolute -top-16 -right-16 w-40 h-40 bg-yellow-100 rounded-full opacity-20 pointer-events-none"></div>
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-yellow-200 rounded-full opacity-20 pointer-events-none"></div>
         </div>
-    );
+    </div>
+);
+
 };
 
 export default SignupScreen;
